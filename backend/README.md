@@ -18,10 +18,58 @@ pip install -r requirements.txt
 
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
+## How to train transformer model
+
+```bash
+python -m app.training.train_text_transformer --data-path dataset/text/medicine.csv --output-dir trained_models/text_transformer --epochs 10 --batch-size 64 --max-len 64
+
+```
 
 The API root will be available at: `http://localhost:8000`
 
 Interactive docs (FastAPI Swagger UI):
 
 - Swagger: `http://localhost:8000/docs`
+
+## Input 
+
+```JSON
+
+{
+  "diagnoses": ["Acne vulgaris"],
+  "symptoms": ["pustules on face", "oily skin"],
+  "notes": "Teenager with moderate acne, otherwise healthy.",
+  "current_medications": ["Paracetamol"]
+}
+
+```
+- That text (diagnoses + symptoms + notes) is what the Transformer model “reads”. It predicts a Reason (label from your medicine csv), and then the backend maps that Reason → medicines from the CSV and returns suggestions.
+
+## Output 
+
+```JSON
+
+{
+  "suggestions": [
+    {
+      "drug_code": "isotretinoin",
+      "name": "Isotretinoin",
+      "score": 0.87,
+      "warnings": []
+    },
+    {
+      "drug_code": "doxycycline",
+      "name": "Doxycycline",
+      "score": 0.65,
+      "warnings": []
+    }
+  ],
+  "ddi_warnings": [
+    "No known interactions in this toy graph."
+  ],
+  "disclaimer": "This is a research demo only ... (etc)"
+}
+```
+
+
 - ReDoc:   `http://localhost:8000/redoc`
