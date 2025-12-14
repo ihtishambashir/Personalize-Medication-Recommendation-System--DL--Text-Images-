@@ -1,2 +1,11 @@
 .idea
 .venv
+
+dataset/*
+!dataset/.gitkeep
+
+trained_models/*
+!trained_models/.gitkeep/
+
+*.pt
+*.zip
