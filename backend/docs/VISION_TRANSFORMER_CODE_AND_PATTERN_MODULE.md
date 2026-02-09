@@ -63,7 +63,7 @@ File: `app/models/vision_transformer.py`
   - `get_vit_num_heads(...)`
   - These are used by the new pattern-analysis module to explain how ViT processes image patches.
 
-## 3) Vision Transformer Code (AI-Style Structured Explanation)
+## 3) Vision Transformer Code
 
 1. Input checkpoint path.
 2. Validate required files (`vision_transformer.pt`, `classes.json`).
