@@ -79,6 +79,42 @@ curl -X POST "http://localhost:8000/api/vision/skin-diagnosis?top_k=3" ^
 
 Response: top-k class labels with softmax scores plus a research-only disclaimer. The endpoint returns 503 if the ViT checkpoint is missing.
 
+### Skin pattern analysis (ViT explainability)
+
+`POST /api/vision/skin-pattern-analysis?top_k=3`  
+Payload: multipart form with file field `file` containing a JPG/PNG image.
+
+```bash
+curl -X POST "http://localhost:8000/api/vision/skin-pattern-analysis?top_k=3" ^
+  -F "file=@\"dataset/skin images/test/nv/ISIC_0024306.jpg\""
+```
+
+Response includes:
+
+- top-k predictions
+- ViT architecture metadata (patch size, patch grid, layers, heads)
+- recognition steps
+- salient patches (most influential image regions)
+- research-only disclaimer
+
+### Skin pattern colored output image
+
+`POST /api/vision/skin-pattern-analysis/image?top_k=3`  
+Payload: multipart form with file field `file` containing a JPG/PNG image.
+
+```bash
+curl -X POST "http://localhost:8000/api/vision/skin-pattern-analysis/image?top_k=3" ^
+  -F "file=@\"dataset/skin images/test/nv/ISIC_0024306.jpg\"" ^
+  --output skin_pattern_overlay.png
+```
+
+This returns a PNG with a realistic color heatmap over the lesion area and highlighted patch boxes where the model focused most.
+
+## Documentation
+
+- `docs/VISION_TRANSFORMER_CODE_AND_PATTERN_MODULE.md`: full backend code understanding plus detailed Vision Transformer and pattern module explanation (human-style + AI-style).
+- `docs/VIT_AND_TEXT_TRANSFORMER_PROFESSIONAL_DOCUMENTATION.md`: professional technical documentation for ViT + text Transformer provenance, architecture, training, inference, and functionality.
+
 ---
 
 This codebase is for research and educational purposes only; do not use it for any clinical workflow.
