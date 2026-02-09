@@ -33,7 +33,7 @@ This document explains:
 - `app/training/train_vit_skin.py`
   - Training pipeline for ViT skin classifier.
 
-## 2) Vision Transformer Code (Human-Written Explanation)
+## 2) Vision Transformer Code
 
 File: `app/models/vision_transformer.py`
 
