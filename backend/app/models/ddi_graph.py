@@ -9,7 +9,7 @@ from typing import Iterable, List, Sequence, Set, Tuple
 class DDIGraph:
     """Very small in-memory DDI graph.
 
-    In the thesis work this class is the place where you would plug in a real
+    In the work this class is the place where you would plug in a real
     drug-drug interaction knowledge base (e.g. TWOSIDES or a hospital-specific
     rules engine). For the backend demo we only keep a tiny list of risky pairs
     so that the API can illustrate how DDI checks are incorporated.
